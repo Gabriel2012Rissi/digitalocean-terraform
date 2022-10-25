@@ -3,7 +3,7 @@ terraform {
     organization = "my-organization"
 
     workspaces {
-      name = "my-workspace"
+      prefix = "my-workspace-prefix-"
     }
   }
 }

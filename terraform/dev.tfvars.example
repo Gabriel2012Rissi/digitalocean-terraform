@@ -1,4 +1,4 @@
-cluster_name    = "meu-cluster-k8s"
+cluster_name    = "meu-cluster-dev"
 cluster_region  = "nyc1"
 cluster_version = "1.23.9-do.0"
 cluster_tags    = ["k8s", "meu-cluster-k8s"]

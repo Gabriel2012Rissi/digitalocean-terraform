@@ -26,35 +26,57 @@ vagrant ssh
 
 Para utilizar o [Terraform](https://github.com/hashicorp/terraform) com o [docker-compose](https://docs.docker.com/compose/install), siga os passos a seguir:
 
-1. Inicialize o [Terraform](https://github.com/hashicorp/terraform) com o comando:
+1. Na página do [Terraform Cloud](https://app.terraform.io), crie os workspaces para "dev" e "production".
+
+**Observação:** Lembre-se de alterar o "Execution Mode" para "Local".
+
+2. Inicialize o [Terraform](https://github.com/hashicorp/terraform) e selecione um dos workspaces criados no passo anterior.
 
 ```
-docker-compose run --rm terraform init -backend-config=config.remote.tfbackend
+docker-compose run --rm terraform init
 ```
 
 **Observação:** Não se esqueça de preencher corretarmente o arquivo 'backend.tf'.
 
-2. Para planejar a infraestrutura, utilize o comando:
+3. Para validar o código, use o comando:
 
 ```
-docker-compose run --rm terraform plan
+docker-compose run --rm terraform validate
 ```
 
-3. Para aplicar a infraestrutura, utilize o comando:
+4. Caso queira saber qual o workspace selecionado, use o comando:
 
 ```
-docker-compose run --rm terraform apply
+docker-compose run --rm terraform workspace show
 ```
 
-4. Para adicionar o 'kube_config.yaml' gerado pelo Terraform e testar com o ['kubectl'](https://kubernetes.io/docs/reference/kubectl/kubectl/), use os comandos:
+5. Para alterar o workspace, use o comando:
+
+```
+docker-compose run --rm terraform workspace select <workspace_name>
+```
+
+6. Para planejar a infraestrutura, utilize o comando:
+
+```
+docker-compose run --rm terraform plan -var-file=<workspace_name>.tfvars
+```
+
+7. Para aplicar a infraestrutura, utilize o comando:
+
+```
+docker-compose run --rm terraform apply -var-file=<workspace_name>.tfvars
+```
+
+8. Para adicionar o 'kube_config.yaml' gerado pelo Terraform e testar com o ['kubectl'](https://kubernetes.io/docs/reference/kubectl/kubectl/), use os comandos:
 
 ```
 mv ~/.kube/config ~/.kube/config.backup
-mv terraform/files/kube_config.yaml ~/.kube/config
+mv terraform/files/kube_config-<workspace_name>.yaml ~/.kube/config
 kubectl get nodes
 ```
 
-5. Agora é a hora de testar o nosso cluster, para isso, use a sequência:
+9. Agora é a hora de testar o nosso cluster, para isso, use a sequência:
 
 ```
 cd git
@@ -67,14 +89,10 @@ kubectl apply -f ./deployment.yaml --namespace conversao-temperatura
 kubectl get all --namespace conversao-temperatura
 ```
 
-6. Para acessar a aplicação, basta criar um 'ip reservado'.
-
-**Observação:** Usar 'NodePort' do [Kubernetes](https://kubernetes.io/pt-br) nos services com um 'ip reservado' poderá representar uma boa economia, caso não seja necessário um 'load balance' atrelado... :wink:
-
-7. Finalmente está na hora de destruir a nossa infraestrutura, para isso use o comando:
+10. Finalmente está na hora de destruir a nossa infraestrutura, para isso use o comando:
 
 ```
-docker-compose run --rm terraform destroy
+docker-compose run --rm terraform destroy -var-file=<workspace_name>.tfvars
 ```
 
 ### Referências

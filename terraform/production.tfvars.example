@@ -1,0 +1,30 @@
+cluster_name    = "meu-cluster-production"
+cluster_region  = "nyc1"
+cluster_version = "1.23.9-do.0"
+cluster_tags    = ["k8s", "meu-cluster-k8s"]
+cluster_node_pool = {
+  name  = "default-node-pool"
+  size  = "s-1vcpu-2gb"
+  count = 3
+  labels = {
+    role = "default-node-pool"
+  }
+  tags = ["default-node-pool"]
+  taints = [
+    {
+      key    = "dedicated"
+      value  = "default-node-pool"
+      effect = "NoSchedule"
+    }
+  ]
+}
+cluster_node_pools = [
+  {
+    name   = "premium-node-pool"
+    size   = "s-2vcpu-8gb"
+    count  = 2
+    labels = {}
+    tags   = ["premium-node-pool"]
+    taints = []
+  }
+]

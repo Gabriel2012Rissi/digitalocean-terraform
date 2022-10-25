@@ -19,7 +19,7 @@ data "digitalocean_kubernetes_cluster" "this" {
 
 resource "local_sensitive_file" "kube_config" {
   content              = data.digitalocean_kubernetes_cluster.this.kube_config.0.raw_config
-  filename             = "${path.root}/files/kube_config.yaml"
+  filename             = "${path.root}/files/kube_config-${terraform.workspace}.yaml"
   file_permission      = "0700"
   directory_permission = "0655"
 
