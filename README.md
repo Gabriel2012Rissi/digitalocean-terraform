@@ -33,39 +33,45 @@ Para utilizar o [Terraform](https://github.com/hashicorp/terraform) com o [docke
 2. Inicialize o [Terraform](https://github.com/hashicorp/terraform) e selecione um dos workspaces criados no passo anterior.
 
 ```
-docker-compose run --rm terraform init
+make init
 ```
 
 **Observação:** Não se esqueça de preencher corretarmente o arquivo 'backend.tf'.
 
-3. Para validar o código, use o comando:
+3. Caso queira saber qual o workspace selecionado, use o comando:
 
 ```
-docker-compose run --rm terraform validate
+make workspace-list
 ```
 
-4. Caso queira saber qual o workspace selecionado, use o comando:
+5. Para alterar o workspace, use os comandos:
 
 ```
-docker-compose run --rm terraform workspace show
+# Para 'dev'
+make select-dev
+
+# Para 'production'
+make select-prod
 ```
 
-5. Para alterar o workspace, use o comando:
+6. Para planejar a infraestrutura, utilize os comandos:
 
 ```
-docker-compose run --rm terraform workspace select <workspace_name>
+# Para 'dev'
+make plan-dev
+
+# Para 'production'
+make plan-prod
 ```
 
-6. Para planejar a infraestrutura, utilize o comando:
+7. Para aplicar a infraestrutura, utilize os comandos:
 
 ```
-docker-compose run --rm terraform plan -var-file=<workspace_name>.tfvars
-```
+# Para 'dev'
+make apply-dev
 
-7. Para aplicar a infraestrutura, utilize o comando:
-
-```
-docker-compose run --rm terraform apply -var-file=<workspace_name>.tfvars
+# Para 'production'
+make apply-prod
 ```
 
 8. Para adicionar o 'kube_config.yaml' gerado pelo Terraform e testar com o ['kubectl'](https://kubernetes.io/docs/reference/kubectl/kubectl/), use os comandos:

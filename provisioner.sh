@@ -9,6 +9,7 @@ PACKAGES_ARRAY_DEBIAN=(
   "curl"
   "gnupg"
   "lsb-release"
+  "make"
   "systemd"
 )
 
@@ -19,6 +20,7 @@ PACKAGES_ARRAY_REDHAT=(
   "curl"
   "gnupg"
   "redhat-lsb-core"
+  "make"
   "systemd-libs"
 )
 
