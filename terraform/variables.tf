@@ -34,7 +34,7 @@ variable "cluster_node_pool" {
   description = "Configuração do 'node_pool' padrão do cluster kubernetes"
   default = {
     name  = "default-node-pool"
-    size  = "s-1vcpu-4gb"
+    size  = "s-2vcpu-4gb"
     count = 2
     labels = {
       role = "default-node-pool"

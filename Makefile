@@ -30,6 +30,12 @@ apply-dev: select-dev
 apply-prod: select-prod
 		docker-compose run --rm terraform apply -var-file=environments/production/cluster.tfvars
 
+destroy-dev: select-dev
+		docker-compose run --rm terraform destroy -var-file=environments/dev/cluster.tfvars
+
+destroy-prod: select-prod
+		docker-compose run --rm terraform destroy -var-file=environments/production/cluster.tfvars
+
 help:
 		@echo "Usage: make [target]"
 		@echo ""
@@ -45,4 +51,6 @@ help:
 		@echo "\tplan-prod \tPlanejar as configurações do ambiente: production."
 		@echo "\tapply-dev \tAplicar as configurações do ambiente: dev."
 		@echo "\tapply-prod \tAplicar as configurações do ambiente: production."
+		@echo "\tdestroy-dev \tDestruir as configurações do ambiente: dev."
+		@echo "\tdestroy-prod \tDestruir as configurações do ambiente: production."
 		@echo "\thelp \t\tExibir esta mensagem de ajuda."
