@@ -1,6 +1,6 @@
 cluster_name    = "meu-cluster-dev"
 cluster_region  = "nyc1"
-cluster_version = "1.24.4-do.0"
+cluster_version = "1.25.4-do.0"
 cluster_tags    = ["k8s", "meu-cluster-k8s"]
 cluster_node_pool = {
   name  = "default-node-pool"

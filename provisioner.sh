@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Versão atual do binário do 'docker-compose'
-DOCKER_COMPOSE_VERSION="v2.12.2"
+DOCKER_COMPOSE_VERSION="v2.15.1"
 
 # Pacotes para sistemas baseados em Debian
 PACKAGES_ARRAY_DEBIAN=(

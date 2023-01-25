@@ -13,7 +13,7 @@ variable "cluster_region" {
 variable "cluster_version" {
   type        = string
   description = "Versão do cluster"
-  default     = "1.24.4-do.0"
+  default     = "1.25.4-do.0"
 }
 
 variable "cluster_tags" {

@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   terraform:
-    image: hashicorp/terraform:1.3.4
+    image: hashicorp/terraform:1.3.6
     volumes:
       - ./terraform:/usr/src/infra
     working_dir: /usr/src/infra
